@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Projects from "./Projects";
 import About from "./About";
 
+import './index.css';
+
 function App() {
   return (
     <Router>
