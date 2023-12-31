@@ -74,6 +74,6 @@
 .tagcloud--item:hover {
     animation-name: none;
     color: white;
-    text-transform: uppercase;
+    text-transform: uppercase; 
     font-weight: bold;
 }
