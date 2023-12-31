@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import image1 from "./upscaled_image.png";
+import {TagCloud} from '@frank-mayer/react-tag-cloud';
 
 const Home = () => {
     const [gradientStart, setGradientStart] = useState('100%');
@@ -25,8 +26,6 @@ const Home = () => {
 
                     <div className="float-right" style={{ width: '80%', height: `${gradientStart+50}px`, shapeOutside: 'circle(40% at 60% 30%)' }}></div>
                     {/* , clipPath: 'circle(40% at 60% 30%)' */}
-
-                    {/* TODO: FIX PADDING */}
 
                     <div className="text-justify pt-1-12 mx-1/7 space-y-16">
                         <p>My name is Maxim. I graduated from UC San Diego in March 2023 with a Bachelor of 
@@ -55,13 +54,36 @@ const Home = () => {
                     </div>
 
                     <div className="text-center pt-1-12 mx-1/7 space-y-16">
-                        <h2>Skills</h2>
-                        <p>Java, C, C++, JavaScript, Python, Scikit-learn, PyTorch, TensorFlow, HTML/CSS, React, Node.js, PostgreSQL</p>
+                        <h2 className="font-bold">Skills</h2>
+                        <div className="flex justify-center">
+                            <TagCloud
+                                options={(w) => ({
+                                    radius: Math.min(900, w.innerWidth, w.innerHeight) / 2,
+                                    maxSpeed: "fast",
+                                    keep: true
+                                })}
+                            >
+                                {[
+                                    "Java",
+                                    "C",
+                                    "C++",
+                                    "JavaScript",
+                                    "Python",
+                                    "Scikit-learn",
+                                    "PyTorch",
+                                    "TensorFlow",
+                                    "HTML/CSS",
+                                    "React.js",
+                                    "Node.js",
+                                    "PostgreSQL"
+                                ]}
+                            </TagCloud>
+                        </div>
                     </div>
                 </div>                
             </div>
         </div>
     );
 }
- 
+
 export default Home;
