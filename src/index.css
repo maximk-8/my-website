@@ -77,3 +77,39 @@
     text-transform: uppercase; 
     font-weight: bold;
 }
+
+@keyframes color-change11 {
+    0% { color: #1effa9; }
+    25% { color: #FFD700; }
+    50% { color: #f90053; }
+    75% { color: #00f900; }
+    100% { color: #1effa9; }
+}
+
+@keyframes color-change12 {
+    0% { color: #FFD700; }
+    25% { color: #f90053; }
+    50% { color: #00f900; }
+    75% { color: #1effa9; }
+    100% { color: #FFD700; }
+}
+
+@keyframes color-change13 {
+    0% { color: #f90053; }
+    25% { color: #00f900; }
+    50% { color: #1effa9; }
+    75% { color: #FFD700; }
+    100% { color: #f90053; }
+}
+
+@keyframes color-change14 {
+    0% { color: #00f900; }
+    25% { color: #1effa9; }
+    50% { color: #FFD700; }
+    75% { color: #f90053; }
+    100% { color: #00f900; }
+}
+
+span:hover {
+    animation: color-change11 3s infinite;
+}

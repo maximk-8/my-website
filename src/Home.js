@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import image1 from "./upscaled_image.png";
 import {TagCloud} from '@frank-mayer/react-tag-cloud';
+import useTypewriterEffect from "./useTypewriterEffect";
 
 const Home = () => {
     const [gradientStart, setGradientStart] = useState('100%');
@@ -15,38 +16,7 @@ const Home = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const handleBeforeUnload = () => sessionStorage.removeItem('hasRun');
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        if(!sessionStorage.getItem('hasRun')) {
-            const textElements = Array.from(textRef.current.querySelectorAll('.typewriter'));
-            let delay = 0;
-
-            textElements.forEach((el) => {
-                const text = el.textContent;
-                el.textContent = '';
-
-                for (let i = 0; i < text.length; i++) {
-                    const span = document.createElement('span');
-                    span.textContent = text.charAt(i);
-                    span.style.visibility = 'hidden';
-                    el.appendChild(span);
-                }
-            
-                for (let i = 0; i < el.children.length; i++) {
-                    setTimeout(() => {
-                        el.children[i].style.visibility = 'visible';
-                    }, delay);
-                    delay += 10;
-                }
-            });
-
-            sessionStorage.setItem('hasRun', true);
-        }
-
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, []);
+    useTypewriterEffect([textRef]);
 
     return ( 
         <div>
