@@ -1,62 +1,65 @@
 import { useEffect } from 'react';
 
-const useTypewriterEffect = (refs) => {
+const useTypewriterEffect = (refs, speed, ssVar) => {
     useEffect(() => {
-        const handleBeforeUnload = () => sessionStorage.removeItem('hasRun');
+        const handleBeforeUnload = () => sessionStorage.removeItem(`${ssVar}`);
         window.addEventListener('beforeunload', handleBeforeUnload);
 
-        if(!sessionStorage.getItem('hasRun')) {
+        if(!sessionStorage.getItem(`${ssVar}`)) {
             refs.forEach((ref) => {
-            const textElements = Array.from(ref.current.querySelectorAll('.typewriter'));
-            let delay = 0;
+                const textElements = Array.from(ref.current.querySelectorAll('.typewriter'));
+                let delay = 0;
 
-            textElements.forEach((el) => {
-                const words = el.textContent.split(' ');
-                el.textContent = '';
+                textElements.forEach((el) => {
+                    const wordSpans = Array.from(el.getElementsByTagName('span'));
 
-                words.forEach((word) => {
-                    const wordSpan = document.createElement('span');
-                    wordSpan.textContent = ' ';
+                    wordSpans.forEach((wordSpan) => {
+                        const word = wordSpan.textContent;
+                        wordSpan.textContent = ' ';
 
-                    Array.from(word).forEach((char) => {
-                        const charSpan = document.createElement('span');
-                        charSpan.textContent = char;
-                        charSpan.style.visibility = 'hidden';
-                        wordSpan.appendChild(charSpan);
+                        Array.from(word).forEach((char) => {
+                            const charSpan = document.createElement('span');
+                            charSpan.textContent = char;
+                            charSpan.style.visibility = 'hidden';
+                            charSpan.className = 'new-span';
+                            wordSpan.appendChild(charSpan);
+
+                            const cursorSpan = document.createElement('span');
+                            cursorSpan.textContent = '';
+                            cursorSpan.className = 'cursor';
+                            wordSpan.appendChild(cursorSpan);
+                        });
+
+                        el.appendChild(wordSpan);
                     });
 
-                    el.appendChild(wordSpan);
-                });
+                    const charSpans = el.getElementsByClassName('new-span');
+                    const cursorSpans = el.getElementsByClassName('cursor');
+                    for (let i = 0; i < charSpans.length; i++) {
+                        setTimeout(() => {
+                            charSpans[i].style.visibility = 'visible';
+                            if (i > 0 && cursorSpans[i - 1]) {
+                                cursorSpans[i - 1].textContent = '';
+                            }
+                            if (cursorSpans[i]) {
+                                cursorSpans[i].textContent = '|';
+                            }
+                        }, delay);
+                        delay += speed;
+                    }
 
-                const animations = ['color-change11', 'color-change12', 'color-change13', 'color-change14'];
-                let animationIndex = 0;
-
-                Array.from(el.querySelectorAll('span > span')).forEach((charSpan, index, array) => {
                     setTimeout(() => {
-                        charSpan.style.visibility = 'visible';
-    
-                        // If it's the last character span, replace all character spans with their text content
-                        if (index === array.length - 1) {
-                            Array.from(el.querySelectorAll('span > span')).forEach((charSpan) => {
-                                const parentNode = charSpan.parentNode;
-                                const text = document.createTextNode(charSpan.textContent);
-                                charSpan.parentNode.replaceChild(text, charSpan);
-
-                                parentNode.style.animationName = animations[animationIndex];
-                                animationIndex = (animationIndex + 1) % animations.length;
-                            });
+                        if (cursorSpans.length > 0) {
+                        cursorSpans[cursorSpans.length - 1].textContent = '';
                         }
-                    }, delay);
-                    delay += 10;
+                    }, delay + 1000);
                 });
             });
-        });
-        
         }
 
-        sessionStorage.setItem('hasRun', true);
+        sessionStorage.setItem(`${ssVar}`, true);
         return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, [refs]);
+    }, [refs, speed, ssVar]);
 }
 
 export default useTypewriterEffect;

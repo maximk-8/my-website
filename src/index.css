@@ -74,8 +74,8 @@
 .tagcloud--item:hover {
     animation-name: none;
     color: white;
-    text-transform: uppercase; 
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 @keyframes color-change11 {
@@ -110,6 +110,18 @@
     100% { color: #00f900; }
 }
 
-span:hover {
+span.animate:hover {
     animation: color-change11 3s infinite;
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.cursor {
+    font-weight: lighter;
+    animation: blink 1s step-end infinite;
+}
+  
+@keyframes blink {
+    from, to { color: transparent }
+    50% { color: white }
 }
