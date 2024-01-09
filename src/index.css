@@ -110,7 +110,7 @@
     100% { color: #00f900; }
 }
 
-span.animate:hover {
+span.animated:hover {
     animation: color-change11 3s infinite;
     font-weight: bold;
     font-size: 1.05em;
