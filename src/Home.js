@@ -32,7 +32,6 @@ const Home = () => {
                     minHeight: '100vh' }}>
 
                     <div className="float-right" style={{ width: '80%', height: `${gradientStart+50}px`, shapeOutside: 'circle(40% at 60% 30%)' }}></div>
-                    {/* , clipPath: 'circle(40% at 60% 30%)' */}
 
                     <div ref={textRef} className="text-justify pt-1-12 mx-1/7 space-y-16">
                         <p className="typewriter">
