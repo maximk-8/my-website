@@ -20,6 +20,9 @@ module.exports = {
         '1/2': '50%',
         '3/4': '75%',
       },
+      borderRadius: {
+        'large': '1.5rem',
+      },
     },
   },
   plugins: [],

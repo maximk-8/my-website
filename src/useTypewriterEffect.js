@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 
-const useTypewriterEffect = (refs, speed, ssVar) => {
+const useTypewriterEffect = (refs, speed, ssVar, typewriterStorage) => {
     useEffect(() => {
-        const handleBeforeUnload = () => sessionStorage.removeItem(`${ssVar}`);
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        if(!sessionStorage.getItem(`${ssVar}`)) {
-            refs.forEach((ref) => {
+        if(!typewriterStorage[ssVar]) {
+            refs.forEach((ref, index) => {
                 const textElements = Array.from(ref.current.querySelectorAll('.typewriter'));
                 let delay = 0;
 
@@ -45,7 +42,7 @@ const useTypewriterEffect = (refs, speed, ssVar) => {
                                 cursorSpans[i].textContent = '|';
                             }
                         }, delay);
-                        delay += speed;
+                        delay += speed[index];
                     }
 
                     setTimeout(() => {
@@ -56,10 +53,8 @@ const useTypewriterEffect = (refs, speed, ssVar) => {
                 });
             });
         }
-
-        sessionStorage.setItem(`${ssVar}`, true);
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, [refs, speed, ssVar]);
+        typewriterStorage[ssVar] = true;
+    }, [refs, speed, ssVar, typewriterStorage]);
 }
 
 export default useTypewriterEffect;

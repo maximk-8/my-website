@@ -9,14 +9,20 @@ import About from "./About";
 import './index.css';
 
 function App() {
+  const typewriterStorage = {
+    header: false,
+    home: false,
+    projects: false,
+  } 
+
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header typewriterStorage={typewriterStorage}/>
         <div className="main-display">
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route exact path="/" element={<Home typewriterStorage={typewriterStorage}/>} />
+            <Route path="/projects" element={<Projects typewriterStorage={typewriterStorage}/>} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>

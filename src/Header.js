@@ -4,9 +4,10 @@ import useTypewriterEffect from "./useTypewriterEffect";
 import useHoverAnimation from "./useHoverAnimation";
 import { motion } from "framer-motion";
 
-const Header = () => {
+const Header = ({typewriterStorage}) => {
     const headerRef = useRef(null);
-    useTypewriterEffect([headerRef], 100, "header");
+
+    useTypewriterEffect([headerRef], [100], "header", typewriterStorage);
 
     const c1 = useHoverAnimation("color");
     const c2 = useHoverAnimation("color");
