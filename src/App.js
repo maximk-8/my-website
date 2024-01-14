@@ -10,8 +10,36 @@ import GraphAPI from "./GraphAPI";
 import HuffmanCoding from "./HuffmanCoding";
 import SuperCoinBox from "./SuperCoinBox";
 import SpeedReader from "./SpeedReader";
+import React, { useEffect } from "react";
+import img1 from "./_upscaled_image.png";
+import img2 from "./_text_summarizer.png";
+import img3 from "./_graph_api.png";
+import img4 from "./_huffman_coding.png";
+import img5 from "./_coin_box.png";
+import img6 from "./_speed_reader.png";
+import img7 from "./profile.jpeg";
 
 function App() {
+  useEffect(() => {
+    const images = [img1, img2, img3, img4, img5, img6, img7];
+    const links = [];
+
+    images.forEach(image => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = image;
+      document.head.appendChild(link);
+      links.push(link);
+    });
+
+    return () => {
+      links.forEach(link => {
+        document.head.removeChild(link);
+      });
+    };
+  }, []);
+
   const typewriterStorage = {
     header: false,
     home: false,
