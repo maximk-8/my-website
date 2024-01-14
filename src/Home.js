@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import image1 from "./upscaled_image.png";
+import image1 from "./_upscaled_image.png";
 import {TagCloud} from '@frank-mayer/react-tag-cloud';
 import useTypewriterEffect from "./useTypewriterEffect";
 import useTextAnimation from "./useTextAnimation";
