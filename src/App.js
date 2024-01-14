@@ -21,6 +21,7 @@ function App() {
     huffmanCoding: false,
     superCoinBox: false,
     speedReader: false,
+    about: false,
   } 
 
   return (
@@ -36,7 +37,7 @@ function App() {
             <Route path="/projects/huffman-coding" element={<HuffmanCoding typewriterStorage={typewriterStorage}/>} />
             <Route path="/projects/super-coin-box" element={<SuperCoinBox typewriterStorage={typewriterStorage}/>} />
             <Route path="/projects/speed-reader" element={<SpeedReader typewriterStorage={typewriterStorage}/>} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<About typewriterStorage={typewriterStorage} />} />
           </Routes>
         </div>
         <Footer />

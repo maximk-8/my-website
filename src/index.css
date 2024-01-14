@@ -200,3 +200,48 @@ span.animated:hover {
 .image-box:hover::before, .image-box:hover::after {
     transform: scale(1.05); /* Add this line */
 }
+
+.profile-box {
+    width: 21rem;
+    height: 21rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-box::before {
+    content: "";
+    background: conic-gradient(from var(--gradient-angle), red, yellow, lime, cyan, blue, magenta, red);
+    position: absolute;
+    height: 21rem;
+    width: 21rem;
+    border-radius: inherit;
+    filter: blur(7px);
+    animation: rotation 2s linear infinite;
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-box::after {
+    content: "";
+    background-image: url("./profile.png");
+    position: absolute;
+    background-size: cover; /* Add this line */
+    background-position: center; /* Add this line */
+    width: 19rem;
+    height: 19rem;
+    border-radius: inherit;
+    top: 5%;
+    left: 5%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-box:hover {
+    transform: scale(1.05); /* Add this line */
+}
+
+.profile-box:hover::before, .profile-box:hover::after {
+    transform: scale(1.05); /* Add this line */
+}
