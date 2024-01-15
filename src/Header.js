@@ -23,7 +23,7 @@ const Header = ({typewriterStorage}) => {
         <div ref={headerRef} className="flex justify-evenly py-5 text-white font-mono text-2xl/9 font-bold" style={{
             backgroundImage: "linear-gradient(to right, #3E75B6, #584993, #9F3578)"
         }}>
-            <Link to='/' className="typewriter">
+            <Link to='/home' className="typewriter">
                 <motion.span className="inline-block" animate={c1.controls} onMouseEnter={c1.handleMouseEnter} onMouseLeave={handleMouseLeave}>HOME</motion.span>
             </Link>
             <Link to='/projects' className="typewriter">
