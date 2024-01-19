@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.1.0",
+    "@vercel/analytics": "^1.1.2",
     "autoprefixer": "^10.4.16",
     "framer-motion": "^10.17.9",
     "postcss": "^8.4.32",

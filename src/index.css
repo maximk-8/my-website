@@ -245,10 +245,3 @@ span.animated:hover {
 .profile-box:hover::before, .profile-box:hover::after {
     transform: scale(1.05); /* Add this line */
 }
-
-.circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}

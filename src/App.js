@@ -12,6 +12,7 @@ import SuperCoinBox from "./SuperCoinBox";
 import SpeedReader from "./SpeedReader";
 import React, { useEffect } from "react";
 import LandingPage from "./LandingPage";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const typewriterStorage = {
@@ -51,6 +52,7 @@ function App() {
           } />
         </Routes>
       </Router>
+      <Analytics />
     </div>
   );
 }
