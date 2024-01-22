@@ -226,7 +226,13 @@ const LandingPage = () => {
                             animate="visible"
                         />
                         <motion.path
-                            d="M12 4l0 16"
+                            d="M12 8l0 12"
+                            variants={draw}
+                            initial="hidden"
+                            animate="visible"
+                        />
+                        <motion.circle
+                            cx="12" cy="4.3" r="0.3"
                             variants={draw}
                             initial="hidden"
                             animate="visible"

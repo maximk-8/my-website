@@ -245,3 +245,28 @@ span.animated:hover {
 .profile-box:hover::before, .profile-box:hover::after {
     transform: scale(1.05); /* Add this line */
 }
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+input[type='range'] {
+    -webkit-appearance: none;
+    width: 700px;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    background: linear-gradient(to right, #f99, #9f9, #99f, #f99);
+    border: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -3px;
+}
