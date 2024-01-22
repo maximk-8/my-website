@@ -32,7 +32,7 @@ const SpeedReader = ({typewriterStorage}) => {
                         {`2. Set Reading Speed: Use the slider below the text area to set your desired reading speed in words per minute (WPM). The number next to the slider shows the current speed setting.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                     <p className="typewriter pl-16">
-                        {`3. Start Reading: Click the play button to start reading. The words will be displayed one at a time in the box below the slider at the speed you set.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
+                        {`3. Start Reading: Click the play button to start reading. The words will be displayed one at a time in the box below the text area at the speed you set.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                     <p className="typewriter pl-16">
                         {`4. Pause/Resume Reading: You can pause the reading at any time by clicking the pause button. Click the play button again to resume reading from where you left off.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
