@@ -13,6 +13,17 @@ import SpeedReader from "./SpeedReader";
 import React, { useEffect } from "react";
 import LandingPage from "./LandingPage";
 import { Analytics } from '@vercel/analytics/react';
+import { useLocation } from "react-router-dom";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   const typewriterStorage = {
@@ -30,6 +41,7 @@ function App() {
   return (
     <div>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/*" element={

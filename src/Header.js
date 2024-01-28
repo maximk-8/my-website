@@ -20,7 +20,8 @@ const Header = ({typewriterStorage}) => {
     }
 
     return ( 
-        <div ref={headerRef} className="flex justify-evenly py-5 text-white font-mono text-2xl/9 font-bold" style={{
+        <>
+        <div ref={headerRef} className="fixed top-0 w-full z-50 flex justify-evenly py-5 text-white font-mono text-2xl/9 font-bold" style={{
             backgroundImage: "linear-gradient(to right, #3E75B6, #584993, #9F3578)"
         }}>
             <Link to='/home' className="typewriter">
@@ -33,6 +34,8 @@ const Header = ({typewriterStorage}) => {
                 <motion.span className="inline-block" animate={c3.controls} onMouseEnter={c3.handleMouseEnter} onMouseLeave={handleMouseLeave}>ABOUT ME</motion.span>
             </Link>
         </div>
+        <div className="h-[4.75rem]"></div>
+        </>
     );
 }
  
