@@ -53,21 +53,3 @@ const SpeedReader = ({typewriterStorage}) => {
 }
 
 export default SpeedReader;
-
-/*
-
-Welcome to the Speed Reader! This application is designed to help you improve your reading speed and comprehension. It works by displaying text one word at a time at a speed you set, allowing you to focus on each word as it's displayed. This method of reading can help you increase your reading speed, as it reduces the time spent on eye movement and prevents backtracking.
-
-How to Use the Speed Reader
-Input Text: In the large text area at the top of the page, you can input the text you want to read. You can type in your own text or paste text from another source.
-
-Set Reading Speed: Use the slider below the text area to set your desired reading speed in words per minute (WPM). The number next to the slider shows the current speed setting.
-
-Start Reading: Click the play button to start reading. The words will be displayed one at a time in the box below the slider at the speed you set.
-
-Pause/Resume Reading: You can pause the reading at any time by clicking the pause button. Click the play button again to resume reading from where you left off.
-
-Restart Reading: If you want to start reading from the beginning, click the restart button.
-
-Enjoy your reading!
-*/

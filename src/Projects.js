@@ -38,6 +38,10 @@ const Projects = ({typewriterStorage}) => {
                 </p>
             </div>
             <div className="pb-1-12 space-y-32">
+                <div ref={textRef5}>
+                    <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Super Coin Box mini video game</motion.span></h3>
+                    <Link to="./super-coin-box"><div id="box4" className="image-box"></div></Link>
+                </div>
                 <div ref={textRef6}>
                     <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Speed Reader</motion.span></h3>
                     <Link to="./speed-reader"><div id="box5" className="image-box"></div></Link>
@@ -53,10 +57,6 @@ const Projects = ({typewriterStorage}) => {
                 <div ref={textRef4}>
                     <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Huffman Coding text compressor</motion.span></h3>
                     <Link to="./huffman-coding"><div id="box3" className="image-box"></div></Link>
-                </div>
-                <div ref={textRef5}>
-                    <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Super Coin Box mini video game</motion.span></h3>
-                    <Link to="./super-coin-box"><div id="box4" className="image-box"></div></Link>
                 </div>
             </div>
         </div>
