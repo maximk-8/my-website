@@ -270,3 +270,29 @@ input[type='range']::-webkit-slider-thumb {
     background: white;
     margin-top: -3px;
 }
+
+.react-flow__edge-path {
+    stroke-width: 2px !important;
+    stroke: white !important;
+}
+
+.react-flow__connection-path {
+    stroke-width: 2px !important;
+    stroke: white !important;
+}
+/*
+.react-flow__node.selected {
+    border: red 5px solid !important;
+    border-radius: 50%;
+}
+
+.selected-nodes {
+    border: red 5px solid !important;
+    border-radius: 50%;
+}
+*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

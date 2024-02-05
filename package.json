@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@frank-mayer/react-tag-cloud": "^1.2.1",
+    "@mui/material": "^5.15.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,6 +22,7 @@
     "react-router-dom": "^6.21.0",
     "react-scripts": "5.0.1",
     "react-tsparticles": "^2.12.2",
+    "reactflow": "^11.10.3",
     "styled-components": "^6.1.6",
     "tailwindcss": "^3.4.0",
     "tsparticles-slim": "^2.12.0",
