@@ -38,6 +38,10 @@ const Projects = ({typewriterStorage}) => {
                 </p>
             </div>
             <div className="pb-1-12 space-y-32">
+                <div ref={textRef3}>
+                    <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Graph API</motion.span></h3>
+                    <Link to="./graph-api"><div id="box2" className="image-box"></div></Link>
+                </div>
                 <div ref={textRef5}>
                     <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Super Coin Box mini video game</motion.span></h3>
                     <Link to="./super-coin-box"><div id="box4" className="image-box"></div></Link>
@@ -49,10 +53,6 @@ const Projects = ({typewriterStorage}) => {
                 <div ref={textRef2}>
                     <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>ML-based text summarizer</motion.span></h3>
                     <Link to="./text-summarizer"><div id="box1" className="image-box"></div></Link>
-                </div>
-                <div ref={textRef3}>
-                    <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Graph API</motion.span></h3>
-                    <Link to="./graph-api"><div id="box2" className="image-box"></div></Link>
                 </div>
                 <div ref={textRef4}>
                     <h3 className="font-bold text-center pb-8 typewriter"><motion.span className="inline-block" animate={c1.controls}>Huffman Coding text compressor</motion.span></h3>
