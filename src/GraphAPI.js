@@ -2,6 +2,7 @@ import useTextAnimation from "./useTextAnimation";
 import { useRef } from "react";
 import useTypewriterEffect from "./useTypewriterEffect";
 import GraphUIWithProvider from "./GraphUIWithProvider";
+import LottieAnimation from "./LottieAnimation";
 
 const GraphAPI = ({typewriterStorage}) => {
     const textRef = useRef(null);
@@ -12,13 +13,13 @@ const GraphAPI = ({typewriterStorage}) => {
 
     return (
         <div className="text-white font-mono text-2xl/9 min-h-screen" style={{backgroundImage: "linear-gradient(to bottom, black, #3E75B6, #584993, #9F3578)"}}>
-            <div className="text-justify py-1-12 mx-1/7 space-y-16">
+            <div className="text-justify py-1-12 mx-1/7">
                 <div ref={textRef}>
                     <h1 className="text-center font-bold typewriter">
                         {`Graph API`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </h1>
                 </div>
-                <div ref={textRef2} className="space-y-8 pb-12">
+                <div ref={textRef2} className="space-y-8 pt-16">
                     <p className="typewriter">
                         {`Welcome to the GraphAPI! This application is designed to help you visualize and understand complex graphs and networks. It works by displaying nodes and edges in an interactive interface, allowing you to explore the connections and relationships in your data.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
@@ -32,7 +33,7 @@ const GraphAPI = ({typewriterStorage}) => {
                         {`2. Create Nodes: To create a new node, click anywhere in the box.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                     <p className="typewriter pl-16">
-                        {`3. Connect Nodes: Connect the nodes with edges by dragging the edges from one node to the other. Don't forget to give the edges a weight!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
+                        {`3. Connect Nodes: Connect the nodes with edges by dragging the edges from one node to the other (green to blue or vice versa). Don't forget to give the edges a weight!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                     <p className="typewriter pl-16">
                         {`4. Delete Nodes and Edges: You can delete edges and nodes by selecting them and pressing backspace.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
@@ -43,10 +44,8 @@ const GraphAPI = ({typewriterStorage}) => {
                     <p className="typewriter font-bold">
                         {`Enjoy exploring your data!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
-                    <p className="typewriter text-sm">
-                        {`PS: The 'shortest path' feature is just playing a bit of hide and seek at the moment. It's almost ready to come out and play, just a bit more work to do. Stay tuned!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
-                    </p>
                 </div>
+                <LottieAnimation />
                 <div>
                     <GraphUIWithProvider />
                 </div>

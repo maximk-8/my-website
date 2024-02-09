@@ -25,6 +25,21 @@ function ScrollToTop() {
   return null;
 }
 
+function PageTitleUpdater() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentPath = location.pathname.split('/')[1];
+    if (currentPath === "") {
+      document.title = "Maxim Kondrashuk";
+      return;
+    }
+    document.title = `Maxim Kondrashuk | ${currentPath.charAt(0).toUpperCase() + currentPath.slice(1)}`;
+  }, [location]);
+
+  return null;
+}
+
 function App() {
   const typewriterStorage = {
     header: false,
@@ -41,6 +56,7 @@ function App() {
   return (
     <div>
       <Router>
+        <PageTitleUpdater />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />

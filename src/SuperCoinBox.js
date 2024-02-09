@@ -1,6 +1,7 @@
 import useTextAnimation from "./useTextAnimation";
 import { useRef } from "react";
 import useTypewriterEffect from "./useTypewriterEffect";
+import LottieAnimation from "./LottieAnimation";
 
 const SuperCoinBox = ({typewriterStorage}) => {
     const textRef = useRef(null);
@@ -11,13 +12,13 @@ const SuperCoinBox = ({typewriterStorage}) => {
 
     return (
         <div className="text-white font-mono text-2xl/9 min-h-screen" style={{backgroundImage: "linear-gradient(to bottom, black, #3E75B6, #584993, #9F3578)"}}>
-            <div className="text-justify py-1-12 mx-1/7 space-y-16">
+            <div className="text-justify py-1-12 mx-1/7">
                 <div ref={textRef}>
                     <h1 className="text-center font-bold typewriter">
                         {`Super Coin Box mini video game`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </h1>
                 </div>
-                <div ref={textRef2} className="space-y-8">
+                <div ref={textRef2} className="space-y-8 pt-16">
                     <p className="typewriter">
                         {`Welcome to Super Coin Box! This mini video game is designed to bring you a fun and engaging gaming experience right from your browser. The game is simple, yet addictive - collect as many coins as you can while avoiding the enemies.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
@@ -43,6 +44,7 @@ const SuperCoinBox = ({typewriterStorage}) => {
                         {`Enjoy the game and aim for a high score!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                 </div>
+                <LottieAnimation />
                 <div className="flex items-center justify-center pt-16" style={{ transform: 'scale(1.3)'}}>
                     <div style={{ 
                         border: '8px solid', 

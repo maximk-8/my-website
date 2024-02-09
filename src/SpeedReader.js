@@ -2,6 +2,7 @@ import useTextAnimation from "./useTextAnimation";
 import { useRef } from "react";
 import useTypewriterEffect from "./useTypewriterEffect";
 import SpeedReaderProject from "./SpeedReaderProject";
+import LottieAnimation from "./LottieAnimation";
 
 const SpeedReader = ({typewriterStorage}) => {
     const textRef = useRef(null);
@@ -12,13 +13,13 @@ const SpeedReader = ({typewriterStorage}) => {
 
     return (
         <div className="text-white font-mono text-2xl/9 min-h-screen" style={{backgroundImage: "linear-gradient(to bottom, black, #3E75B6, #584993, #9F3578)"}}>
-            <div className="text-justify py-1-12 mx-1/7 space-y-16">
+            <div className="text-justify py-1-12 mx-1/7">
                 <div ref={textRef}>
                     <h1 className="text-center font-bold typewriter">
                         {`Speed Reader`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </h1>
                 </div>
-                <div ref={textRef2} className="space-y-8">
+                <div ref={textRef2} className="space-y-8 pt-16">
                     <p className="typewriter">
                         {`Welcome to the Speed Reader! This application is designed to help you improve your reading speed and comprehension. It works by displaying text one word at a time at a speed you set, allowing you to focus on each word as it's displayed. This method of reading can help you increase your reading speed, as it reduces the time spent on eye movement and prevents backtracking.`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
@@ -44,6 +45,7 @@ const SpeedReader = ({typewriterStorage}) => {
                         {`Enjoy your reading!`.split(" ").map((word, i) => <span key={i} className="animated">{word} </span>)}
                     </p>
                 </div>
+                <LottieAnimation />
                 <div>
                     <SpeedReaderProject />
                 </div>

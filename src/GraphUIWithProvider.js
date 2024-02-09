@@ -11,23 +11,26 @@ import ReactFlow, {
     useReactFlow,
     ReactFlowProvider,
     useOnSelectionChange,
+    Controls
 } from 'reactflow';
 import { Alert, AlertTitle, Snackbar } from '@mui/material';
 import 'reactflow/dist/style.css';
+import Lottie from 'react-lottie';
+import loadingData from './loadingAnimation.json';
 
 const ButtonStateContext = React.createContext();
 
 const CircleNode = ({ data }) => {
     return (
-        <div style={{ background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 60%)', border: '2px solid #ddd', borderRadius: '50%', width: 75, height: 75, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Handle type="target" position="left" isConnectable={data.isConnectable} style={{ width: 10, height: 10, borderRadius: '50%', background: 'white' }} />
-            <Handle type="source" position="right" isConnectable={data.isConnectable} style={{ width: 10, height: 10, borderRadius: '50%', background: 'white' }} />
+        <div style={{ background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 60%)', border: '2px solid #ddd', borderRadius: '50%', width: 100, height: 100, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Handle type="target" position="left" isConnectable={data.isConnectable} style={{ width: 20, height: 20, borderRadius: '50%', background: '#00BFFF', left: '-10px' }} />
+            <Handle type="source" position="right" isConnectable={data.isConnectable} style={{ width: 20, height: 20, borderRadius: '50%', background: '#98FB98', right: '-10px' }} />
             {data.label}
         </div>
     );
 };
 
-const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, label }) => {
+const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, label, style }) => {
     const isSelectNodesPressed = React.useContext(ButtonStateContext);
 
     const {setEdges} = useReactFlow();
@@ -41,14 +44,13 @@ const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, label }) => {
   
     return (
         <>
-            <BaseEdge id={id} path={edgePath} />
+            <BaseEdge id={id} path={edgePath} style={style}/>
             <EdgeLabelRenderer>
                 <input
                     type="number"
                     min="1"
                     step="1"
                     value={label || ""}
-                    placeholder={1}
                     disabled={isSelectNodesPressed}
                     style={{
                         position: 'absolute',
@@ -79,12 +81,16 @@ const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, label }) => {
 
 const initialNodes = [
     { id: '1', type: "circleNode", position: { x: 300, y: 200 }, data: { label: 'A', isConnectable: true } },
-    { id: '2', type: "circleNode", position: { x: 400, y: 500 }, data: { label: 'B', isConnectable: true } },
-    { id: '3', type: "circleNode", position: { x: 800, y: 300 }, data: { label: 'C', isConnectable: true } },
+    { id: '2', type: "circleNode", position: { x: 800, y: 300 }, data: { label: 'B', isConnectable: true } },
+    { id: '3', type: "circleNode", position: { x: 400, y: 500 }, data: { label: 'C', isConnectable: true } },
     { id: '4', type: "circleNode", position: { x: 1100, y: 600 }, data: { label: 'D', isConnectable: true } },
 ];
 
-const initialEdges = [{ id: 'reactflow__edge-1-3', source: '1', target: '3', type: 'custom-edge' }];
+const initialEdges = [
+    { id: 'reactflow__edge-1-2', source: '1', target: '2', type: 'custom-edge', style: { stroke: 'white', strokeWidth: 2 }, label: 4 },
+    { id: 'reactflow__edge-2-4', source: '2', target: '4', type: 'custom-edge', style: { stroke: 'white', strokeWidth: 2 }, label: 1 },
+    { id: 'reactflow__edge-3-4', source: '3', target: '4', type: 'custom-edge', style: { stroke: 'white', strokeWidth: 2 }, label: 3 } 
+];
 
 const nodeTypes = {
     'circleNode': CircleNode,
@@ -92,6 +98,15 @@ const nodeTypes = {
 
 const edgeTypes = {
     'custom-edge': CustomEdge,
+};
+
+const loadingAnimationOptions = {
+    loop: true,
+    autoplay: true, 
+    animationData: loadingData,
+    rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+    }
 };
 
 const GraphUI = () => {
@@ -103,13 +118,24 @@ const GraphUI = () => {
     const [selectedNodes, setSelectedNodes] = useState([]);
     const nodeIdCounter = useRef(4);
     const [openAlert, setOpenAlert] = useState(false);
+    const [noPathAlert, setNoPathAlert] = useState(false);
     const graphCSV = useRef('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSelectNodesClick = () => {
-        if (!isSelectNodesPressed && checkEdgeLabels()) {
-            setOpenAlert(true);
-            return;
-        }
+        if (!isSelectNodesPressed) {
+            edges.forEach((edge) => {
+                edge.style = { stroke: 'white', strokeWidth: 2 };
+                edge.animated = false;
+            });
+            nodes.forEach((node) => {
+                node.selected = false;
+            });
+            if (checkEdgeLabels()) {
+                setOpenAlert(true);
+                return;
+            }
+        } 
         setIsSelectNodesPressed(!isSelectNodesPressed);
         if (isSelectNodesPressed) {
             selectedNodes.forEach((nodeId) => {
@@ -123,6 +149,7 @@ const GraphUI = () => {
 
     const handleCloseAlert = (event, reason) => {
         setOpenAlert(false);
+        setNoPathAlert(false);
     };
 
     const checkEdgeLabels = () => {
@@ -153,7 +180,7 @@ const GraphUI = () => {
     };
     
     const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge({ ...params, type: 'custom-edge' }, eds)),
+        (params) => setEdges((eds) => addEdge({ ...params, type: 'custom-edge', style: { stroke: 'white', strokeWidth: 2 } }, eds)),
         [setEdges],
     );
 
@@ -228,6 +255,99 @@ const GraphUI = () => {
         },
     });
 
+    const selectedEdgesStyles = {
+        stroke: 'red',
+        strokeWidth: 5,
+    };
+
+    const colorEdges = (nodeIds) => {
+        if (nodeIds[0] === "") {
+            setNoPathAlert(true);
+            return;
+        }
+
+        const selectedEdges = [];
+
+        for (let i = 0; i < nodeIds.length - 1; i++) {
+            const source = nodeIds[i];
+            const target = nodeIds[i + 1];
+    
+            const edge = edges.find(edge => 
+                (edge.source === source && edge.target === target) || 
+                (edge.source === target && edge.target === source)
+            );
+    
+            if (edge) {
+                selectedEdges.push(edge);
+            }
+        }
+
+        selectedEdges.forEach(edge => {
+            edge.style = selectedEdgesStyles;
+            edge.animated = true;
+        });
+    };
+
+    const handleFindShortestUnweightedPath = async () => {
+        const graph = graphCSV.current;
+        const term = "unweighted";
+        const nodes = selectedNodes;
+
+        try {
+
+            setIsLoading(true);
+            const response = await fetch('http://backend-env-v2-env.eba-4p5bpwzm.us-east-1.elasticbeanstalk.com/api/findPath', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ graph, nodes, term }),
+            });
+            const data = await response.json();
+
+            colorEdges(data.result.split(','));
+            setIsLoading(false);
+
+        } catch (error) {
+
+            setIsLoading(false);
+            throw new Error(error);
+
+        }
+
+        handleSelectNodesClick();
+    }
+
+    const handleFindShortestWeightedPath = async () => {
+        const graph = graphCSV.current;
+        const term = "weighted";
+        const nodes = selectedNodes;
+        
+        try {
+
+            setIsLoading(true);
+            const response = await fetch('http://backend-env-v2-env.eba-4p5bpwzm.us-east-1.elasticbeanstalk.com/api/findPath', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ graph, nodes, term }),
+            });
+            const data = await response.json();
+
+            colorEdges(data.result.split(','));
+            setIsLoading(false);
+
+        } catch (error) {
+
+            setIsLoading(false);
+            throw new Error(error);
+
+        }
+        
+        handleSelectNodesClick();
+    }
+
     useEffect(() => {
         const updatedNodes = nodes.map((node) => ({
             ...node,
@@ -250,12 +370,12 @@ const GraphUI = () => {
     return (
         <ButtonStateContext.Provider value={ isSelectNodesPressed }>
             <div>
-                <div style={{ 
-                    border: '8px solid', 
-                    borderImageSlice: 1, 
-                    borderImageSource: 'conic-gradient(#f99, #9f9, #99f, #f99)',
-                    height: 800
-                }}>
+                <div className='relative h-[800px]' style={{ border: '8px solid', borderImageSlice: 1, borderImageSource: 'conic-gradient(#f99, #9f9, #99f, #f99)' }}>
+                    {isLoading &&
+                        <div className='flex items-center justify-center absolute w-full h-[784px] z-10 bg-white bg-opacity-80'>
+                            <Lottie options={loadingAnimationOptions} height={500} width={500} />
+                        </div>
+                    }
                     <ReactFlow
                         nodes={nodes}
                         edges={edges}
@@ -269,6 +389,7 @@ const GraphUI = () => {
                         edgeTypes={edgeTypes}
                     >
                         <Background variant="dots" gap={12} size={1} />
+                        <Controls />
                     </ReactFlow>
                 </div>
                 <div className='flex items-center justify-center flex-col'>
@@ -284,13 +405,13 @@ const GraphUI = () => {
                         {isSelectNodesPressed && selectedNodes.length === 2 &&
                             <>
                                 <button 
-                                    onClick={() => alert('Find Shortest Unweighted Path')}
+                                    onClick={handleFindShortestUnweightedPath}
                                     className='mr-2 bg-transparent hover:bg-blue-500 text-white font-semibold py-2 px-4 border border-blue-500 border-4 hover:border-transparent rounded'
                                 >
                                     Find Shortest Unweighted Path 
                                 </button>
                                 <button 
-                                    onClick={() => alert('Find Shortest Weighted Path')}
+                                    onClick={handleFindShortestWeightedPath}
                                     className='ml-2 bg-transparent hover:bg-blue-500 text-white font-semibold py-2 px-4 border border-blue-500 border-4 hover:border-transparent rounded'
                                 >
                                     Find Shortest Weighted Path 
@@ -304,6 +425,12 @@ const GraphUI = () => {
                 <Alert onClose={handleCloseAlert} severity="error" variant="filled">
                     <AlertTitle>Error</AlertTitle>
                     Please give all edges a weight before selecting nodes
+                </Alert>
+            </Snackbar>
+            <Snackbar open={noPathAlert} autoHideDuration={5000} onClose={handleCloseAlert} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                <Alert onClose={handleCloseAlert} severity="info" variant="filled">
+                    <AlertTitle>Info</AlertTitle>
+                    No path found between selected nodes
                 </Alert>
             </Snackbar>
         </ButtonStateContext.Provider>
